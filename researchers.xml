@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<researchers>
+    <researcher>
+        <username>Tugkan Tuglular</username>
+        <password>password1</password>
+    </researcher>
+    <researcher>
+        <username>Dilek Ozturk</username>
+        <password>password2</password>
+    </researcher>
+    <researcher>
+        <username>Serhat Caner</username>
+        <password>password3</password>
+    </researcher>
+    <researcher>
+        <username>Fakhri Jafarov</username>
+        <password>password4</password>
+    </researcher>
+    <researcher>
+        <username>Zeynep Bektas</username>
+        <password>password5</password>
+    </researcher>
+</researchers>

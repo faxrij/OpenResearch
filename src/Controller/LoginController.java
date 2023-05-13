@@ -1,6 +1,7 @@
 package Controller;
 
-import Model.LoginModel;
+import Component.Researcher;
+import Model.ResearcherModel;
 import View.LoginView;
 
 import javax.swing.*;
@@ -8,31 +9,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginController {
-    private LoginView view;
-    private LoginModel model;
+    private ResearcherModel researcherModel;
+    private LoginView loginView;
 
-    public LoginController(LoginView view, LoginModel model) {
-        this.view = view;
-        this.model = model;
-        this.view.addSubmitListener(new SubmitListener());
-        this.view.addResetListener(new ResetListener());
+    public LoginController(ResearcherModel researcherModel, LoginView loginView) {
+        this.researcherModel = researcherModel;
+        this.loginView = loginView;
+
+        this.loginView.addLoginListener(new LoginListener());
     }
 
-    class SubmitListener implements ActionListener {
+    private class LoginListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
-            model.setUsername(view.getUsername());
-            model.setPassword(view.getPassword());
-            if (model.authenticate(model.getUsername(), model.getPassword())) {
-                view.showError("Login Successful!");
-                view.clearFields();
+            String username = loginView.getUsername();
+            String password = loginView.getPassword();
+
+            boolean authenticated = researcherModel.authenticate(username, password);
+
+            if (authenticated) {
+                JOptionPane.showMessageDialog(loginView, "Login successful");
             } else {
-                view.showError("Invalid Username or Password");
+                JOptionPane.showMessageDialog(loginView, "Invalid username or password");
             }
-        }
-    }
-    class ResetListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            view.clearFields();
         }
     }
 }

@@ -1,6 +1,9 @@
 import Controller.LoginController;
 import Model.LoginModel;
+import Model.ResearcherModel;
 import Reader.ReadFile;
+import Repository.ResearcherRepository;
+import Repository.XmlResearcherRepository;
 import View.LoginView;
 
 public class MainFlow {
@@ -8,11 +11,10 @@ public class MainFlow {
         ReadFile readFile = new ReadFile();
         readFile.read();
 
-        LoginView loginView = new View.LoginView();
-        LoginModel model = new LoginModel();
-        LoginController controller = new LoginController(loginView, model);
-
-        // Display the view
+        ResearcherRepository researcherRepository = new XmlResearcherRepository("researchers.xml");
+        ResearcherModel researcherModel = new ResearcherModel(researcherRepository);
+        LoginView loginView = new LoginView();
+        LoginController loginController = new LoginController(researcherModel, loginView);
         loginView.setVisible(true);
 
     }
