@@ -54,7 +54,7 @@ public class XmlResearcherRepository implements ResearcherRepository {
 
                 Researcher researcher = new Researcher(username, password);
 
-                researcher.setFollower(getInteractedResearchers(element, "follower"));
+                researcher.setFollower(getInteractedResearchers(element, "followedBy"));
                 researcher.setFollowing(getInteractedResearchers(element, "following"));
 
                 researcherList.add(researcher);
@@ -81,6 +81,14 @@ public class XmlResearcherRepository implements ResearcherRepository {
         }
         return null;
     }
-
+    @Override
+    public Researcher authenticate(String username, String password) {
+        List<Researcher> researchers = getResearchers();
+        for (Researcher researcher : researchers) {
+            if (researcher.getUsername().equals(username) && researcher.getPassword().equals(password)) {
+                return researcher;
+            }
+        }
+        return null; // Authentication failed
+    }
 }
-

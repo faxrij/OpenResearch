@@ -11,9 +11,9 @@ public class MainFlow {
         readFile.read();
 
         ResearcherRepository researcherRepository = new XmlResearcherRepository("researchers.xml");
-        ResearcherModel researcherModel = new ResearcherModel(researcherRepository);
+//        ResearcherModel researcherModel = new ResearcherModel(researcherRepository);
         LoginView loginView = new LoginView();
-        LoginController loginController = new LoginController(researcherModel, loginView);
+        LoginController loginController = new LoginController(researcherRepository, loginView);
         loginView.setVisible(true);
 
     }
