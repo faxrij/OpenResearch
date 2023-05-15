@@ -1,5 +1,4 @@
 import Controller.LoginController;
-import Model.LoginModel;
 import Model.ResearcherModel;
 import Reader.ReadFile;
 import Repository.ResearcherRepository;

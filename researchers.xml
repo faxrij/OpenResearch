@@ -3,21 +3,31 @@
     <researcher>
         <username>Tugkan Tuglular</username>
         <password>password1</password>
+        <following>Serhat Caner,Fakhri Jafarov</following>
+        <followedBy>Zeynep Bektas</followedBy>
     </researcher>
     <researcher>
         <username>Dilek Ozturk</username>
         <password>password2</password>
+        <following>Serhat Caner,Fakhri Jafarov</following>
+        <followedBy>Zeynep Bektas</followedBy>
     </researcher>
     <researcher>
         <username>Serhat Caner</username>
         <password>password3</password>
+        <following>Serhat Caner,Fakhri Jafarov</following>
+        <followedBy>Zeynep Bektas</followedBy>
     </researcher>
     <researcher>
         <username>Fakhri Jafarov</username>
         <password>password4</password>
+        <following>Serhat Caner,Fakhri Jafarov</following>
+        <followedBy>Zeynep Bektas</followedBy>
     </researcher>
     <researcher>
         <username>Zeynep Bektas</username>
         <password>password5</password>
+        <following>Serhat Caner,Fakhri Jafarov</following>
+        <followedBy>Fakhri Jafarov</followedBy>
     </researcher>
 </researchers>

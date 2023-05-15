@@ -12,7 +12,7 @@ import Component.Paper;
 import org.jbibtex.*;
 
 public class ReadFile {
-    private Paper creatingPapers(String fileName, BibTeXEntry bibTeXEntry) {
+    public Paper getPapers(String fileName, BibTeXEntry bibTeXEntry) {
         String authors = bibTeXEntry.getField(BibTeXEntry.KEY_AUTHOR).toUserString();
 
         String title = bibTeXEntry.getField(BibTeXEntry.KEY_TITLE).toUserString();
@@ -34,7 +34,6 @@ public class ReadFile {
             return new ConferencePaper(authors, title, year, doi, bookTitle);
         }
         return null;
-
     }
 
     public void read() {
@@ -62,7 +61,7 @@ public class ReadFile {
 
                 // Iterate over the entries and extract the name of each entry
                 for (Map.Entry<Key, BibTeXEntry> entry : entries.entrySet()) {
-                    papers.add(creatingPapers(bibFile.getName(), entry.getValue()));
+                    papers.add(getPapers(bibFile.getName(), entry.getValue()));
                 }
             }
 

@@ -5,16 +5,16 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class LoginView extends JFrame {
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private JButton loginButton;
-    private JLabel errorMessageLabel;
+    private final JTextField usernameField;
+    private final JPasswordField passwordField;
+    private final JButton loginButton;
+    private final JLabel errorMessageLabel;
 
     public LoginView() {
         // set up the JFrame properties
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 150);
+        setSize(600, 400);
         setLocationRelativeTo(null); // center the JFrame on the screen
 
         // set up the user interface elements

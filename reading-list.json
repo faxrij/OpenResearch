@@ -1,0 +1,44 @@
+[{
+  "readinglist_id": "1",
+  "creator_researcher_name": "Tugkan Tuglular",
+  "readinglist_name": "Software Engineering",
+  "number_of_papers": 3,
+  "name_of_papers": [
+    "Paper 1",
+    "Paper 2",
+    "Paper 3"
+  ]},
+  {
+    "readinglist_id": "2",
+    "creator_researcher_name": "Fakhri Jafarov",
+    "readinglist_name": "Artificial Intelligence",
+    "number_of_papers": 3,
+    "name_of_papers": [
+      "Paper 1",
+      "Paper 2",
+      "Paper 3"
+    ]
+  },
+  {
+    "readinglist_id": "3",
+    "creator_researcher_name": "Zeynep Bektas",
+    "readinglist_name": "Machine Learning",
+    "number_of_papers": 3,
+    "name_of_papers": [
+      "Paper 1",
+      "Paper 2",
+      "Paper 3"
+    ]
+  },
+  {
+    "readinglist_id": "4",
+    "creator_researcher_name": "Dilek Ozturk",
+    "readinglist_name": "Software Testing",
+    "number_of_papers": 3,
+    "name_of_papers": [
+      "Paper 1",
+      "Paper 2",
+      "Paper 3"
+    ]
+  }
+]

@@ -1,13 +1,10 @@
 package Model;
 
-import helper.ResearcherAuthenticator;
-
 public class LoginModel {
     private String username;
     private String password;
-    private ResearcherAuthenticator authenticator;
 
-    public boolean authenticate(String username, String password, ResearcherAuthenticator authenticator) {
+    public boolean authenticate(String username, String password) {
         // Simulate authentication logic
         return username.equals("admin") && password.equals("password");
     }

@@ -3,14 +3,15 @@ package Controller;
 import Component.Researcher;
 import Model.ResearcherModel;
 import View.LoginView;
+import View.ResearcherView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginController {
-    private ResearcherModel researcherModel;
-    private LoginView loginView;
+    private final ResearcherModel researcherModel;
+    private final LoginView loginView;
 
     public LoginController(ResearcherModel researcherModel, LoginView loginView) {
         this.researcherModel = researcherModel;
@@ -29,7 +30,13 @@ public class LoginController {
 
             if (authenticated) {
                 JOptionPane.showMessageDialog(loginView, "Login successful");
-            } else {
+                Researcher researcher = researcherModel.getResearcher(username);
+                ResearcherView profileView = new ResearcherView();
+                ProfileController profileController = new ProfileController(researcher, profileView);
+                profileController.displayProfilePage();
+
+            }
+            else {
                 JOptionPane.showMessageDialog(loginView, "Invalid username or password");
             }
         }
