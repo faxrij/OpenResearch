@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<researchers>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><researchers>
     <researcher>
         <username>Tugkan Tuglular</username>
         <password>password1</password>
@@ -13,15 +12,21 @@
         <followedBy>Zeynep Bektas</followedBy>
     </researcher>
     <researcher>
+        <username>12</username>
+        <password>12</password>
+        <following>Serhat Caner,Fakhri Jafarov,Zeynep Bektas,Tugkan Tuglular</following>
+        <followedBy>Zeynep Bektas</followedBy>
+    </researcher>
+    <researcher>
         <username>Serhat Caner</username>
         <password>password3</password>
-        <following>Serhat Caner,Fakhri Jafarov</following>
+        <following>Dilek Ozturk,Fakhri Jafarov</following>
         <followedBy>Zeynep Bektas</followedBy>
     </researcher>
     <researcher>
         <username>Fakhri Jafarov</username>
         <password>password4</password>
-        <following>Serhat Caner,Fakhri Jafarov</following>
+        <following>Serhat Caner,Zeynep Bektas</following>
         <followedBy>Zeynep Bektas</followedBy>
     </researcher>
     <researcher>

@@ -2,38 +2,48 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 import Component.Researcher;
 
 
-public class ResearcherView {
+public class ResearcherView extends JFrame{
     private JFrame frame;
     private JLabel nameLabel;
     private JTextArea readingListsTextArea;
     private JTextArea followingResearchersTextArea;
     private JTextArea followerResearchersTextArea;
+    private final JButton followButton;
+    private final JButton addReading;
+
 
     public ResearcherView() {
+        followButton = new JButton("Follow");
+        addReading = new JButton("Add Reading");
         initialize();
     }
 
     private void initialize() {
-        frame = new JFrame();
-        frame.setTitle("Profile Page");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLocationRelativeTo(null);
+        setTitle("Researcher Page");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500, 600);
+        setLocationRelativeTo(null); // center the JFrame on the screen
 
-        JPanel panel = new JPanel(new GridLayout(4, 1));
+
+        JPanel panel = new JPanel(new GridLayout(5, 2));
 
         nameLabel = new JLabel();
         panel.add(nameLabel);
+
+        JLabel bos = new JLabel();
+        panel.add(bos);  // It is put in order to make UI much clearer
 
         JLabel readingListsLabel = new JLabel("Reading Lists:");
         panel.add(readingListsLabel);
 
         readingListsTextArea = new JTextArea();
         readingListsTextArea.setEditable(false);
+
         JScrollPane readingListsScrollPane = new JScrollPane(readingListsTextArea);
         panel.add(readingListsScrollPane);
 
@@ -53,16 +63,18 @@ public class ResearcherView {
         JScrollPane followerResearchersScrollPane = new JScrollPane(followerResearchersTextArea);
         panel.add(followerResearchersScrollPane);
 
-        frame.add(panel);
+        panel.add(followButton);
+        panel.add(addReading);
+
+        setContentPane(panel);
+
     }
 
     public void displayProfile(Researcher researcher) {
         nameLabel.setText("Researcher: " + researcher.getUsername());
-//        setTextAreaContent(readingListsTextArea, researcher.getReadingLists());
+
         setTextAreaContent(followingResearchersTextArea, researcher.getFollowing());
         setTextAreaContent(followerResearchersTextArea, researcher.getFollower());
-
-        frame.setVisible(true);
     }
 
     private void setTextAreaContent(JTextArea textArea, List<String> content) {
@@ -72,4 +84,10 @@ public class ResearcherView {
         }
         textArea.setText(sb.toString());
     }
+
+    public void followListener(ActionListener listener) {
+        followButton.addActionListener(listener);
+    }
+
+
 }

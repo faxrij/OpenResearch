@@ -31,9 +31,11 @@ public class LoginController {
 
             if (researcher!=null) {
                 JOptionPane.showMessageDialog(loginView, "Login successful");
-//                Researcher researcher = researcherModel.getResearcher(username);
+                loginView.setVisible(false);
                 ResearcherView profileView = new ResearcherView();
-                ProfileController profileController = new ProfileController(researcher, profileView);
+                ProfileController profileController = new ProfileController(researcher, profileView, researcherRepository);
+                profileView.setVisible(true);
+
                 profileController.displayProfilePage();
 
             }

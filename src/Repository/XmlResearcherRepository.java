@@ -10,6 +10,11 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,7 +74,8 @@ public class XmlResearcherRepository implements ResearcherRepository {
         if (researcherString == null) {
             return null;
         }
-        List<String> followedList = Arrays.asList(researcherString.split(","));
+        List<String> followedList = new ArrayList<>(Arrays.asList(researcherString.split(",")));
+
         System.out.println(followedList);
         return followedList;
     }
@@ -90,5 +96,72 @@ public class XmlResearcherRepository implements ResearcherRepository {
             }
         }
         return null; // Authentication failed
+    }
+
+    @Override
+    public boolean containsResearcher(String username) {
+        List<Researcher> researchers = getResearchers();
+        for (Researcher researcher : researchers) {
+            if (researcher.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false; // Authentication failed
+    }
+
+    @Override
+    public boolean checkIfFollowed(String current, String wanted) {
+        List<Researcher> researchers = getResearchers();
+        for (Researcher researcher: researchers) {
+            if (researcher.getUsername().equals(current) && researcher.getFollowing().contains(wanted)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void addFollower(Researcher currentResearcher, String toBeFollowed) {
+        try {
+            // Load the XML file
+            File xmlFile = new File("researchers.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.parse(xmlFile);
+
+            // Find the researcher element with the corresponding username
+            NodeList researcherNodes = document.getElementsByTagName("researcher");
+            for (int i = 0; i < researcherNodes.getLength(); i++) {
+                Element researcherElement = (Element) researcherNodes.item(i);
+                String researcherUsername = researcherElement.getElementsByTagName("username").item(0).getTextContent();
+
+                if (researcherUsername.equals(currentResearcher.getUsername())) {
+                    // Find the following element
+                    ifFound(toBeFollowed, researcherElement);
+                    break;
+                }
+            }
+
+            // Save the updated XML file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(xmlFile);
+            transformer.transform(source, result);
+        } catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void ifFound(String toBeFollowed, Element researcherElement) {
+        Element followingElement = (Element) researcherElement.getElementsByTagName("following").item(0);
+
+        // Append the new follower
+        String currentFollowing = followingElement.getTextContent();
+        if (currentFollowing.isEmpty()) {
+            followingElement.setTextContent(toBeFollowed);
+        } else {
+            followingElement.setTextContent(currentFollowing + "," + toBeFollowed);
+        }
     }
 }
