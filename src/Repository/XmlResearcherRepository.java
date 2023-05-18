@@ -61,6 +61,7 @@ public class XmlResearcherRepository implements ResearcherRepository {
 
                 researcher.setFollower(getInteractedResearchers(element, "followedBy"));
                 researcher.setFollowing(getInteractedResearchers(element, "following"));
+//                researcher.setFollowing(getInteractedResearchers(element, "readingList"));
 
                 researcherList.add(researcher);
             }

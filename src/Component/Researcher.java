@@ -8,6 +8,7 @@ public class Researcher {
     private final String password;
     private List<String> follower;
     private List<String> following;
+//    private List<>
 
     public Researcher(String username, String password) {
         this.username = username;
