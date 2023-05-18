@@ -14,7 +14,7 @@
     <researcher>
         <username>12</username>
         <password>12</password>
-        <following>Serhat Caner,Fakhri Jafarov,Zeynep Bektas,Tugkan Tuglular</following>
+        <following>Serhat Caner,Fakhri Jafarov,Zeynep Bektas</following>
         <followedBy>Zeynep Bektas</followedBy>
     </researcher>
     <researcher>
@@ -33,6 +33,6 @@
         <username>Zeynep Bektas</username>
         <password>password5</password>
         <following>Serhat Caner,Fakhri Jafarov</following>
-        <followedBy>Fakhri Jafarov</followedBy>
+        <followedBy>Fakhri Jafarov,12</followedBy>
     </researcher>
 </researchers>

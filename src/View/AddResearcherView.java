@@ -30,7 +30,7 @@ public class AddResearcherView extends JFrame {
         return usernameField.getText();
     }
 
-    public void addResearcheristener(ActionListener listener) {
+    public void addResearcherListener(ActionListener listener) {
         submit.addActionListener(listener);
     }
 

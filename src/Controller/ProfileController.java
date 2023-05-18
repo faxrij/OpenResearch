@@ -5,10 +5,8 @@ import Repository.ResearcherRepository;
 import View.AddResearcherView;
 import View.ResearcherView;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class ProfileController {
     private final Researcher researchModel;
@@ -36,16 +34,6 @@ public class ProfileController {
             AddResearcherController addResearcherController = new AddResearcherController(addResearcherView,
                     researcherRepository, researchModel, profileView);
 
-//                JOptionPane.showMessageDialog(loginView, "Login successful");
-//                loginView.setVisible(false);
-//                ResearcherView profileView = new ResearcherView();
-//                ProfileController profileController = new ProfileController(researcher, profileView);
-//                profileController.displayProfilePage();
-//
-//            }
-//            else {
-//                JOptionPane.showMessageDialog(addResearcherView, "Researcher with entered username does not exist");
-//            }
         }
     }
 }

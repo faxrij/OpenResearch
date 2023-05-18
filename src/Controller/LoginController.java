@@ -1,7 +1,6 @@
 package Controller;
 
 import Component.Researcher;
-import Model.ResearcherModel;
 import Repository.ResearcherRepository;
 import View.LoginView;
 import View.ResearcherView;

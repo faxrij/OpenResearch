@@ -20,7 +20,7 @@ public class AddResearcherController {
         this.researcherRepository = researcherRepository;
         this.addResearcherView = addResearcherView;
         this.currentResearcher = currentResearcher;
-        this.addResearcherView.addResearcheristener(new AddResearcherListener());
+        this.addResearcherView.addResearcherListener(new AddResearcherListener());
         this.profileView = profileView;
     }
 
@@ -47,7 +47,9 @@ public class AddResearcherController {
 
         private void ifNotFollowed(String wantedResearcher) {
             currentResearcher.addFollowing(wantedResearcher);
-            researcherRepository.addFollower(currentResearcher, wantedResearcher);
+
+            researcherRepository.addFollower(currentResearcher.getUsername(), wantedResearcher);
+
             addResearcherView.setVisible(false);
             profileView.displayProfile(currentResearcher);
         }

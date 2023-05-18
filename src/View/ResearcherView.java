@@ -8,7 +8,6 @@ import Component.Researcher;
 
 
 public class ResearcherView extends JFrame{
-    private JFrame frame;
     private JLabel nameLabel;
     private JTextArea readingListsTextArea;
     private JTextArea followingResearchersTextArea;

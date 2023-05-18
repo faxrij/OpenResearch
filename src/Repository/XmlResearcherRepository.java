@@ -106,7 +106,7 @@ public class XmlResearcherRepository implements ResearcherRepository {
                 return true;
             }
         }
-        return false; // Authentication failed
+        return false;
     }
 
     @Override
@@ -121,7 +121,7 @@ public class XmlResearcherRepository implements ResearcherRepository {
     }
 
     @Override
-    public void addFollower(Researcher currentResearcher, String toBeFollowed) {
+    public void addFollower(String currentResearcher, String toBeFollowed) {
         try {
             // Load the XML file
             File xmlFile = new File("researchers.xml");
@@ -131,16 +131,8 @@ public class XmlResearcherRepository implements ResearcherRepository {
 
             // Find the researcher element with the corresponding username
             NodeList researcherNodes = document.getElementsByTagName("researcher");
-            for (int i = 0; i < researcherNodes.getLength(); i++) {
-                Element researcherElement = (Element) researcherNodes.item(i);
-                String researcherUsername = researcherElement.getElementsByTagName("username").item(0).getTextContent();
-
-                if (researcherUsername.equals(currentResearcher.getUsername())) {
-                    // Find the following element
-                    ifFound(toBeFollowed, researcherElement);
-                    break;
-                }
-            }
+            findResearcher(currentResearcher, toBeFollowed, researcherNodes, "following");
+            findResearcher(toBeFollowed, currentResearcher, researcherNodes, "followedBy");
 
             // Save the updated XML file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -153,8 +145,21 @@ public class XmlResearcherRepository implements ResearcherRepository {
         }
     }
 
-    private static void ifFound(String toBeFollowed, Element researcherElement) {
-        Element followingElement = (Element) researcherElement.getElementsByTagName("following").item(0);
+    private static void findResearcher(String currentResearcher, String toBeFollowed, NodeList researcherNodes, String tagName) {
+        for (int i = 0; i < researcherNodes.getLength(); i++) {
+            Element researcherElement = (Element) researcherNodes.item(i);
+            String researcherUsername = researcherElement.getElementsByTagName("username").item(0).getTextContent();
+
+            if (researcherUsername.equals(currentResearcher)) {
+                // Find the following element
+                ifFound(toBeFollowed, researcherElement, tagName);
+                break;
+            }
+        }
+    }
+
+    private static void ifFound(String toBeFollowed, Element researcherElement, String tagName) {
+        Element followingElement = (Element) researcherElement.getElementsByTagName(tagName).item(0);
 
         // Append the new follower
         String currentFollowing = followingElement.getTextContent();

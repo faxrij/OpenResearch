@@ -9,5 +9,5 @@ public interface ResearcherRepository { //WE put Interface here, because maybe i
     Researcher authenticate(String username, String password); //IAuthable
     boolean containsResearcher(String username); //
     boolean checkIfFollowed(String current, String wanted); //IFollowable
-    void addFollower(Researcher currentResearcher, String toBeFollowed); // IFollowable
+    void addFollower(String currentResearcher, String toBeFollowed); // IFollowable
 }
