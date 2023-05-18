@@ -48,4 +48,8 @@ public class Researcher {
     public void addFollowing(String researcher) {
         following.add(researcher);
     }
+
+    public void removeFollowing(String researcher) {
+        following.remove(researcher);
+    }
 }

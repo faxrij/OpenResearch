@@ -2,7 +2,7 @@ package Controller;
 
 import Component.Researcher;
 import Repository.ResearcherRepository;
-import View.AddResearcherView;
+import View.ResearcherInputView;
 import View.ResearcherView;
 
 import java.awt.event.ActionEvent;
@@ -18,7 +18,7 @@ public class ProfileController {
         this.profileView = profileView;
         this.researcherRepository = researcherRepository;
         this.profileView.followListener(new FollowListener());
-
+        this.profileView.unfollowListener(new UnfollowListener());
     }
 
     public void displayProfilePage() {
@@ -28,10 +28,22 @@ public class ProfileController {
     private class FollowListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            AddResearcherView addResearcherView = new AddResearcherView();
-            addResearcherView.setVisible(true);
+            ResearcherInputView researcherInputView = new ResearcherInputView();
+            researcherInputView.setVisible(true);
 
-            AddResearcherController addResearcherController = new AddResearcherController(addResearcherView,
+            FollowResearchController researcherInputController = new FollowResearchController(researcherInputView,
+                    researcherRepository, researchModel, profileView);
+
+        }
+    }
+
+    private class UnfollowListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            ResearcherInputView researcherInputView = new ResearcherInputView();
+            researcherInputView.setVisible(true);
+
+            UnfollowResearchController researcherInputController = new UnfollowResearchController(researcherInputView,
                     researcherRepository, researchModel, profileView);
 
         }

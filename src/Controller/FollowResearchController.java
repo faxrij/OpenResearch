@@ -2,46 +2,44 @@ package Controller;
 
 import Component.Researcher;
 import Repository.ResearcherRepository;
-import View.AddResearcherView;
+import View.ResearcherInputView;
 import View.ResearcherView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddResearcherController {
+public class FollowResearchController {
     private final ResearcherRepository researcherRepository;
-    private final AddResearcherView addResearcherView;
+    private final ResearcherInputView researcherInputView;
     private final Researcher currentResearcher;
     private final ResearcherView profileView;
 
-    public AddResearcherController(AddResearcherView addResearcherView, ResearcherRepository researcherRepository,
-                                   Researcher currentResearcher, ResearcherView profileView) {
+    public FollowResearchController(ResearcherInputView researcherInputView, ResearcherRepository researcherRepository,
+                                    Researcher currentResearcher, ResearcherView profileView) {
         this.researcherRepository = researcherRepository;
-        this.addResearcherView = addResearcherView;
+        this.researcherInputView = researcherInputView;
         this.currentResearcher = currentResearcher;
-        this.addResearcherView.addResearcherListener(new AddResearcherListener());
+        this.researcherInputView.addActionListener(new FollowResearcherListener());
         this.profileView = profileView;
     }
 
-    private class AddResearcherListener implements ActionListener {
+    private class FollowResearcherListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            String wantedResearcher = addResearcherView.getUsername();
+            String wantedResearcher = researcherInputView.getUsername();
             boolean exists = researcherRepository.containsResearcher(wantedResearcher);
 
             if (exists) {
                 boolean isFollowed = researcherRepository.checkIfFollowed(currentResearcher.getUsername(), wantedResearcher);
                 if (isFollowed) {
-                    JOptionPane.showMessageDialog(addResearcherView, "Already following");
-                }
-                else {
+                    JOptionPane.showMessageDialog(researcherInputView, "Already following");
+                } else {
                     ifNotFollowed(wantedResearcher);
                 }
-            }
-            else {
-                JOptionPane.showMessageDialog(addResearcherView, "Researcher with entered username does not exist");
+            } else {
+                JOptionPane.showMessageDialog(researcherInputView, "Researcher with entered username does not exist");
             }
         }
 
@@ -50,7 +48,7 @@ public class AddResearcherController {
 
             researcherRepository.addFollower(currentResearcher.getUsername(), wantedResearcher);
 
-            addResearcherView.setVisible(false);
+            researcherInputView.setVisible(false);
             profileView.displayProfile(currentResearcher);
         }
     }

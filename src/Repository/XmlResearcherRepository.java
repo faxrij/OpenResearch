@@ -1,24 +1,10 @@
 package Repository;
 
 import Component.Researcher;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import helper.FollowResearcher;
+import helper.ResearchAuth;
+import helper.ResearcherHelper;
+import helper.UnfollowResearcher;
 import java.util.List;
 
 public class XmlResearcherRepository implements ResearcherRepository {
@@ -30,73 +16,14 @@ public class XmlResearcherRepository implements ResearcherRepository {
 
     @Override
     public List<Researcher> getResearchers() {
-        try {
-            File xmlFile = new File(xmlFilePath);
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(xmlFile);
-            document.getDocumentElement().normalize();
-
-            NodeList nodeList = document.getElementsByTagName("researcher");
-
-            return parseAndGetResearchersList(nodeList);
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        ResearcherHelper researcherHelper = new ResearcherHelper();
+        return researcherHelper.getResearchersFrom(xmlFilePath);
     }
 
-    private List<Researcher> parseAndGetResearchersList(NodeList nodeList) {
-        List<Researcher> researcherList = new ArrayList<>();
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-
-                Element element = (Element) node;
-
-                String username = getTextContent(element, "username");
-                String password = getTextContent(element, "password");
-
-                Researcher researcher = new Researcher(username, password);
-
-                researcher.setFollower(getInteractedResearchers(element, "followedBy"));
-                researcher.setFollowing(getInteractedResearchers(element, "following"));
-//                researcher.setFollowing(getInteractedResearchers(element, "readingList"));
-
-                researcherList.add(researcher);
-            }
-        }
-        return researcherList;
-    }
-
-    private List<String> getInteractedResearchers(Element element, String interactionResearch) {
-        String researcherString = getTextContent(element, interactionResearch);
-
-        if (researcherString == null) {
-            return null;
-        }
-        List<String> followedList = new ArrayList<>(Arrays.asList(researcherString.split(",")));
-
-        System.out.println(followedList);
-        return followedList;
-    }
-
-    private String getTextContent(Element element, String tagName) {
-        Node node = element.getElementsByTagName(tagName).item(0);
-        if (node != null) {
-            return node.getTextContent();
-        }
-        return null;
-    }
     @Override
     public Researcher authenticate(String username, String password) {
-        List<Researcher> researchers = getResearchers();
-        for (Researcher researcher : researchers) {
-            if (researcher.getUsername().equals(username) && researcher.getPassword().equals(password)) {
-                return researcher;
-            }
-        }
-        return null; // Authentication failed
+        ResearchAuth researchAuth = new ResearchAuth();
+        return researchAuth.authenticate(username, password);
     }
 
     @Override
@@ -113,7 +40,7 @@ public class XmlResearcherRepository implements ResearcherRepository {
     @Override
     public boolean checkIfFollowed(String current, String wanted) {
         List<Researcher> researchers = getResearchers();
-        for (Researcher researcher: researchers) {
+        for (Researcher researcher : researchers) {
             if (researcher.getUsername().equals(current) && researcher.getFollowing().contains(wanted)) {
                 return true;
             }
@@ -123,51 +50,13 @@ public class XmlResearcherRepository implements ResearcherRepository {
 
     @Override
     public void addFollower(String currentResearcher, String toBeFollowed) {
-        try {
-            // Load the XML file
-            File xmlFile = new File("researchers.xml");
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(xmlFile);
-
-            // Find the researcher element with the corresponding username
-            NodeList researcherNodes = document.getElementsByTagName("researcher");
-            findResearcher(currentResearcher, toBeFollowed, researcherNodes, "following");
-            findResearcher(toBeFollowed, currentResearcher, researcherNodes, "followedBy");
-
-            // Save the updated XML file
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(document);
-            StreamResult result = new StreamResult(xmlFile);
-            transformer.transform(source, result);
-        } catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-            e.printStackTrace();
-        }
+        FollowResearcher followResearcher = new FollowResearcher();
+        followResearcher.addFollower(currentResearcher, toBeFollowed);
     }
 
-    private static void findResearcher(String currentResearcher, String toBeFollowed, NodeList researcherNodes, String tagName) {
-        for (int i = 0; i < researcherNodes.getLength(); i++) {
-            Element researcherElement = (Element) researcherNodes.item(i);
-            String researcherUsername = researcherElement.getElementsByTagName("username").item(0).getTextContent();
-
-            if (researcherUsername.equals(currentResearcher)) {
-                // Find the following element
-                ifFound(toBeFollowed, researcherElement, tagName);
-                break;
-            }
-        }
-    }
-
-    private static void ifFound(String toBeFollowed, Element researcherElement, String tagName) {
-        Element followingElement = (Element) researcherElement.getElementsByTagName(tagName).item(0);
-
-        // Append the new follower
-        String currentFollowing = followingElement.getTextContent();
-        if (currentFollowing.isEmpty()) {
-            followingElement.setTextContent(toBeFollowed);
-        } else {
-            followingElement.setTextContent(currentFollowing + "," + toBeFollowed);
-        }
+    @Override
+    public void unFollow(String currentResearcher, String toBeUnfollowed) {
+        UnfollowResearcher unfollowResearcher = new UnfollowResearcher();
+        unfollowResearcher.unFollow(currentResearcher, toBeUnfollowed);
     }
 }

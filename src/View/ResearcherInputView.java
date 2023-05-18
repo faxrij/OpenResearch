@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class AddResearcherView extends JFrame {
+public class ResearcherInputView extends JFrame {
     private final JTextField usernameField;
     private final JButton submit;
-    public AddResearcherView() {
+    public ResearcherInputView() {
         // set up the JFrame properties
         setTitle("AddResearcher");
         setSize(600, 400);
@@ -30,8 +30,10 @@ public class AddResearcherView extends JFrame {
         return usernameField.getText();
     }
 
-    public void addResearcherListener(ActionListener listener) {
+    public void addActionListener(ActionListener listener) {
         submit.addActionListener(listener);
     }
-
+//    public void removeResearcherListener(ActionListener listener) {
+//        submit.addActionListener(listener);
+//    }
 }

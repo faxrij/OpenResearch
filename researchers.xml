@@ -4,42 +4,42 @@
         <password>password1</password>
         <following>Serhat Caner,Fakhri Jafarov</following>
         <followedBy>Zeynep Bektas</followedBy>
-        <readingList></readingList>
+        <readingList/>
     </researcher>
     <researcher>
         <username>Dilek Ozturk</username>
         <password>password2</password>
         <following>Serhat Caner,Fakhri Jafarov</following>
         <followedBy>Zeynep Bektas</followedBy>
-        <readingList></readingList>
+        <readingList/>
     </researcher>
     <researcher>
         <username>12</username>
         <password>12</password>
-        <following>Serhat Caner,Fakhri Jafarov,Zeynep Bektas</following>
+        <following>Serhat Caner,Fakhri Jafarov</following>
         <followedBy>Zeynep Bektas</followedBy>
         <readingList>
-            <category></category>
+            <category/>
         </readingList>
     </researcher>
     <researcher>
         <username>Serhat Caner</username>
         <password>password3</password>
         <following>Dilek Ozturk,Fakhri Jafarov</following>
-        <followedBy>Zeynep Bektas</followedBy>
-        <readingList></readingList>
+        <followedBy>Zeynep Bektas,12</followedBy>
+        <readingList/>
     </researcher>
     <researcher>
         <username>Fakhri Jafarov</username>
         <password>password4</password>
         <following>Serhat Caner,Zeynep Bektas</following>
-        <followedBy>Zeynep Bektas</followedBy>
-        <readingList></readingList>
+        <followedBy>Zeynep Bektas,12</followedBy>
+        <readingList/>
     </researcher>
     <researcher>
         <username>Zeynep Bektas</username>
         <password>password5</password>
         <following>Serhat Caner,Fakhri Jafarov</following>
-        <followedBy>Fakhri Jafarov,12</followedBy>
+        <followedBy>Fakhri Jafarov</followedBy>
     </researcher>
 </researchers>

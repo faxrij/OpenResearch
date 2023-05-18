@@ -15,8 +15,11 @@ public class ResearcherView extends JFrame{
     private final JButton followButton;
     private final JButton addReading;
 
+    private final JButton unfollowButton;
+
 
     public ResearcherView() {
+        unfollowButton = new JButton("Unfollow");
         followButton = new JButton("Follow");
         addReading = new JButton("Add Reading");
         initialize();
@@ -28,8 +31,7 @@ public class ResearcherView extends JFrame{
         setSize(500, 600);
         setLocationRelativeTo(null); // center the JFrame on the screen
 
-
-        JPanel panel = new JPanel(new GridLayout(5, 2));
+        JPanel panel = new JPanel(new GridLayout(6, 2));
 
         nameLabel = new JLabel();
         panel.add(nameLabel);
@@ -63,10 +65,10 @@ public class ResearcherView extends JFrame{
         panel.add(followerResearchersScrollPane);
 
         panel.add(followButton);
+        panel.add(unfollowButton);
         panel.add(addReading);
 
         setContentPane(panel);
-
     }
 
     public void displayProfile(Researcher researcher) {
@@ -87,6 +89,7 @@ public class ResearcherView extends JFrame{
     public void followListener(ActionListener listener) {
         followButton.addActionListener(listener);
     }
-
-
+    public void unfollowListener(ActionListener listener) {
+        unfollowButton.addActionListener(listener);
+    }
 }
