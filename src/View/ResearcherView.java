@@ -6,22 +6,18 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import Component.Researcher;
 
-
 public class ResearcherView extends JFrame{
     private JLabel nameLabel;
-    private JTextArea readingListsTextArea;
     private JTextArea followingResearchersTextArea;
     private JTextArea followerResearchersTextArea;
     private final JButton followButton;
-    private final JButton addReading;
-
+    private final JButton readingListButton;
     private final JButton unfollowButton;
-
 
     public ResearcherView() {
         unfollowButton = new JButton("Unfollow");
         followButton = new JButton("Follow");
-        addReading = new JButton("Add Reading");
+        readingListButton = new JButton("See Reading List");
         initialize();
     }
 
@@ -31,7 +27,7 @@ public class ResearcherView extends JFrame{
         setSize(500, 600);
         setLocationRelativeTo(null); // center the JFrame on the screen
 
-        JPanel panel = new JPanel(new GridLayout(6, 2));
+        JPanel panel = new JPanel(new GridLayout(5, 2));
 
         nameLabel = new JLabel();
         panel.add(nameLabel);
@@ -39,14 +35,6 @@ public class ResearcherView extends JFrame{
         JLabel bos = new JLabel();
         panel.add(bos);  // It is put in order to make UI much clearer
 
-        JLabel readingListsLabel = new JLabel("Reading Lists:");
-        panel.add(readingListsLabel);
-
-        readingListsTextArea = new JTextArea();
-        readingListsTextArea.setEditable(false);
-
-        JScrollPane readingListsScrollPane = new JScrollPane(readingListsTextArea);
-        panel.add(readingListsScrollPane);
 
         JLabel followingResearchersLabel = new JLabel("Following Researchers:");
         panel.add(followingResearchersLabel);
@@ -66,7 +54,7 @@ public class ResearcherView extends JFrame{
 
         panel.add(followButton);
         panel.add(unfollowButton);
-        panel.add(addReading);
+        panel.add(readingListButton);
 
         setContentPane(panel);
     }
@@ -91,5 +79,8 @@ public class ResearcherView extends JFrame{
     }
     public void unfollowListener(ActionListener listener) {
         unfollowButton.addActionListener(listener);
+    }
+    public void readingListListener(ActionListener listener) {
+        readingListButton.addActionListener(listener);
     }
 }

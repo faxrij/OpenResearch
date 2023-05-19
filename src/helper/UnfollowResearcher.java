@@ -39,15 +39,19 @@ public class UnfollowResearcher {
                 removeResearcherFromList(toBeUnfollowedElement, "followedBy", currentResearcher);
 
                 // Save the updated XML file
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(document);
-                StreamResult result = new StreamResult(xmlFile);
-                transformer.transform(source, result);
+                updateXmlFile(xmlFile, document);
             }
         } catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateXmlFile(File xmlFile, Document document) throws TransformerException {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        DOMSource source = new DOMSource(document);
+        StreamResult result = new StreamResult(xmlFile);
+        transformer.transform(source, result);
     }
 
     private Element findResearcherElement(String researcherName, Document document) {

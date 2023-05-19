@@ -63,10 +63,8 @@ public class ResearcherHelper {
         if (researcherString == null) {
             return null;
         }
-        List<String> followedList = new ArrayList<>(Arrays.asList(researcherString.split(",")));
 
-        System.out.println(followedList);
-        return followedList;
+        return new ArrayList<>(Arrays.asList(researcherString.split(",")));
     }
 
     private String getTextContent(Element element, String tagName) {

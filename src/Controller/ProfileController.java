@@ -1,7 +1,9 @@
 package Controller;
 
 import Component.Researcher;
+import Reader.JsonReader;
 import Repository.ResearcherRepository;
+import View.ReadingListView;
 import View.ResearcherInputView;
 import View.ResearcherView;
 
@@ -19,6 +21,7 @@ public class ProfileController {
         this.researcherRepository = researcherRepository;
         this.profileView.followListener(new FollowListener());
         this.profileView.unfollowListener(new UnfollowListener());
+        this.profileView.readingListListener(new ReadingListListener());
     }
 
     public void displayProfilePage() {
@@ -45,6 +48,18 @@ public class ProfileController {
 
             UnfollowResearchController researcherInputController = new UnfollowResearchController(researcherInputView,
                     researcherRepository, researchModel, profileView);
+
+        }
+    }
+
+    private class ReadingListListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            ReadingListView readingListView = new ReadingListView();
+            readingListView.setVisible(true);
+
+            ReadingListController readingListController = new ReadingListController(readingListView,
+                    researchModel);
 
         }
     }

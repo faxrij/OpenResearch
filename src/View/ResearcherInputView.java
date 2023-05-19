@@ -25,15 +25,10 @@ public class ResearcherInputView extends JFrame {
         setContentPane(panel);
 
     }
-
     public String getUsername() {
         return usernameField.getText();
     }
-
     public void addActionListener(ActionListener listener) {
         submit.addActionListener(listener);
     }
-//    public void removeResearcherListener(ActionListener listener) {
-//        submit.addActionListener(listener);
-//    }
 }
