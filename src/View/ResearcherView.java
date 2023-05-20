@@ -4,9 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
+
 import Component.Researcher;
 
-public class ResearcherView extends JFrame{
+public class ResearcherView extends JFrame {
     private JLabel nameLabel;
     private JTextArea followingResearchersTextArea;
     private JTextArea followerResearchersTextArea;
@@ -77,9 +78,11 @@ public class ResearcherView extends JFrame{
     public void followListener(ActionListener listener) {
         followButton.addActionListener(listener);
     }
+
     public void unfollowListener(ActionListener listener) {
         unfollowButton.addActionListener(listener);
     }
+
     public void readingListListener(ActionListener listener) {
         readingListButton.addActionListener(listener);
     }

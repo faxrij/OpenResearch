@@ -28,7 +28,7 @@ public class LoginController {
 
             Researcher researcher = researcherRepository.authenticate(username, password);
 
-            if (researcher!=null) {
+            if (researcher != null) {
                 JOptionPane.showMessageDialog(loginView, "Login successful");
                 loginView.setVisible(false);
                 ResearcherView profileView = new ResearcherView();
@@ -37,8 +37,7 @@ public class LoginController {
 
                 profileController.displayProfilePage();
 
-            }
-            else {
+            } else {
                 JOptionPane.showMessageDialog(loginView, "Invalid username or password");
             }
         }

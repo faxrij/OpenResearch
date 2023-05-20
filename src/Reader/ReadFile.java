@@ -26,9 +26,7 @@ public class ReadFile {
             String journal = bibTeXEntry.getField(BibTeXEntry.KEY_JOURNAL).toUserString();
 
             return new ArticlePaper(authors, title, year, volume, number, doi, journal);
-        }
-
-        else if (fileName.startsWith("IP")) {
+        } else if (fileName.startsWith("IP")) {
             String bookTitle = bibTeXEntry.getField(BibTeXEntry.KEY_BOOKTITLE).toUserString();
 
             return new ConferencePaper(authors, title, year, doi, bookTitle);
@@ -63,9 +61,7 @@ public class ReadFile {
                 for (Map.Entry<Key, BibTeXEntry> entry : entries.entrySet()) {
                     papers.add(getPapers(bibFile.getName(), entry.getValue()));
                 }
-            }
-
-            catch (IOException | ParseException e) {
+            } catch (IOException | ParseException e) {
                 System.err.println("Error parsing file " + bibFile.getName() + ": " + e.getMessage());
             }
         }

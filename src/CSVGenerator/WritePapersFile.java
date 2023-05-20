@@ -14,7 +14,7 @@ public class WritePapersFile {
     public void write(List<Paper> paperList) {
         try {
             File file = new File("papers.csv");
-            if (file.length()!=0) {
+            if (file.length() != 0) {
                 return;
             }
 
@@ -22,29 +22,26 @@ public class WritePapersFile {
             writingInForLoop(paperList, writer);
             writer.flush();
             writer.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-}
+    }
 
     private void writingInForLoop(List<Paper> paperList, FileWriter writer) throws IOException {
         Random rand = new Random();
-        
-        for (Paper paperEntry: paperList) {
+
+        for (Paper paperEntry : paperList) {
 
             if (paperEntry.getClass() == ConferencePaper.class) {
                 writer.append("conference paper,");
                 appendCommonInfo(paperEntry, writer);
-                writer.append(((ConferencePaper) paperEntry).getBookTitle()).append(",");
-            }
-
-            else if (paperEntry.getClass() == ArticlePaper.class) {
+                writer.append("bookTitle,").append (((ConferencePaper) paperEntry).getBookTitle()).append(",");
+            } else if (paperEntry.getClass() == ArticlePaper.class) {
                 writer.append("article paper,");
                 appendCommonInfo(paperEntry, writer);
-                writer.append(((ArticlePaper) paperEntry).getVolume()).append(",");
-                writer.append(((ArticlePaper) paperEntry).getNumber()).append(",");
-                writer.append(((ArticlePaper) paperEntry).getJournal()).append(",");
+                writer.append("volume,").append(((ArticlePaper) paperEntry).getVolume()).append(",");
+                writer.append("number,").append(((ArticlePaper) paperEntry).getNumber()).append(",");
+                writer.append("journal,").append(((ArticlePaper) paperEntry).getJournal()).append(",");
             }
             int numberOfDownloads = rand.nextInt(1500);
             writer.append(String.valueOf(numberOfDownloads)).append(";");
@@ -53,9 +50,9 @@ public class WritePapersFile {
     }
 
     private void appendCommonInfo(Paper paper, FileWriter writer) throws IOException {
-        writer.append(paper.getAuthors()).append(",");
-        writer.append(paper.getTitle()).append(",");
-        writer.append(paper.getYear()).append(",");
-        writer.append(paper.getDOI()).append(",");
+        writer.append("authors,").append(paper.getAuthors()).append(",");
+        writer.append("title,").append(paper.getTitle()).append(",");
+        writer.append("year,").append(paper.getYear()).append(",");
+        writer.append("doi,").append(paper.getDOI()).append(",");
     }
 }

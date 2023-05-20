@@ -4,16 +4,25 @@ import Reader.JsonReader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ReadingListView extends JFrame {
     private JList<String> readingListsJList;
-    private JTextArea papersTextArea;
+    private JList<String> papersJList;
     private final JButton addReadingListButton;
+    private final JButton removePaperButton;
+    private final JButton seePaperButton;
 
     public ReadingListView() {
         this.addReadingListButton = new JButton("Add Reading List");
+        this.removePaperButton = new JButton("Remove Paper");
+        this.seePaperButton = new JButton("See Papers");
         initialize();
+    }
+
+    public JList<String> getReadingListsJList() {
+        return readingListsJList;
     }
 
     private void initialize() {
@@ -28,12 +37,18 @@ public class ReadingListView extends JFrame {
         JScrollPane readingListsScrollPane = new JScrollPane(readingListsJList);
         panel.add(readingListsScrollPane, BorderLayout.WEST);
 
-        papersTextArea = new JTextArea();
-        papersTextArea.setEditable(false);
-        JScrollPane papersScrollPane = new JScrollPane(papersTextArea);
+        DefaultListModel<String> papersListModel = new DefaultListModel<>();
+        papersJList = new JList<>(papersListModel);
+        JScrollPane papersScrollPane = new JScrollPane(papersJList);
         panel.add(papersScrollPane, BorderLayout.CENTER);
 
-        panel.add(addReadingListButton, BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+
+        buttonPanel.add(addReadingListButton);
+        buttonPanel.add(removePaperButton);
+        buttonPanel.add(seePaperButton);
+
+        panel.add(buttonPanel, BorderLayout.SOUTH);
 
         readingListsJList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
@@ -48,6 +63,7 @@ public class ReadingListView extends JFrame {
         setContentPane(panel);
     }
 
+
     public void displayReadingLists(List<String> stringList) {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (String item : stringList) {
@@ -56,23 +72,35 @@ public class ReadingListView extends JFrame {
         readingListsJList.setModel(listModel);
     }
 
+    public JList<String> getPapersJList() {
+        return papersJList;
+    }
+
     private void displayPapersForReadingList(String readingListName) {
-        // Retrieve papers for the selected reading list based on readingListName
-        // You can update this method according to your data model and retrieval logic
         List<String> papersList = getPapersForReadingList(readingListName);
 
-        StringBuilder sb = new StringBuilder();
+        DefaultListModel<String> papersListModel = new DefaultListModel<>();
         for (String paper : papersList) {
-            sb.append("- ").append(paper).append("\n");
+            papersListModel.addElement(paper);
         }
-        papersTextArea.setText(sb.toString());
+        papersJList.setModel(papersListModel);
     }
 
     private List<String> getPapersForReadingList(String readingListName) {
-        // Placeholder method to retrieve papers for the selected reading list
-        // Replace this with your actual data retrieval logic
-        // Return a list of papers for the given reading list name
         JsonReader jsonReader = new JsonReader();
         return jsonReader.getPapersOfReadingList(readingListName);
     }
+
+    public void removePaperListener(ActionListener listener) {
+        removePaperButton.addActionListener(listener);
+    }
+
+    public void addPaperListener(ActionListener listener) {
+        seePaperButton.addActionListener(listener);
+    }
+
+    public void addReadingListListener(ActionListener listener) {
+        addReadingListButton.addActionListener(listener);
+    }
+
 }

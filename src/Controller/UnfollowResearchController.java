@@ -16,7 +16,7 @@ public class UnfollowResearchController {
     private final ResearcherView profileView;
 
     public UnfollowResearchController(ResearcherInputView researcherInputView, ResearcherRepository researcherRepository,
-                                     Researcher currentResearcher, ResearcherView profileView) {
+                                      Researcher currentResearcher, ResearcherView profileView) {
         this.researcherRepository = researcherRepository;
         this.researcherInputView = researcherInputView;
         this.currentResearcher = currentResearcher;
@@ -35,12 +35,10 @@ public class UnfollowResearchController {
                 boolean isFollowed = researcherRepository.checkIfFollowed(currentResearcher.getUsername(), wantedResearcher);
                 if (!isFollowed) {
                     JOptionPane.showMessageDialog(researcherInputView, "Not following");
-                }
-                else {
+                } else {
                     ifFollowed(wantedResearcher);
                 }
-            }
-            else {
+            } else {
                 JOptionPane.showMessageDialog(researcherInputView, "Researcher with entered username does not exist");
             }
         }
