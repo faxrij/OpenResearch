@@ -39,7 +39,7 @@ public class ReadingListController {
             CsvReader csvReader = new CsvReader();
             List<Paper> papers = csvReader.parseCSV();
             PaperView paperView = new PaperView(papers, readingListView.getReadingListsJList());
-            paperView.setVisible(true);
+            readingListView.setVisible(false);
             PaperController paperController = new PaperController(paperView, researcher);
         }
     }

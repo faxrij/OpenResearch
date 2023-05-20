@@ -7,6 +7,7 @@ import Model.Researcher;
 import FileOperations.JsonOperations.JsonChecker;
 import FileOperations.JsonOperations.JsonWriter;
 import View.PaperView;
+import View.ReadingListView;
 import org.json.JSONArray;
 
 import javax.swing.*;
@@ -73,6 +74,14 @@ public class PaperController { // Paper View Controller
                     if (!exists) {
                         jsonWriter.addPaperToReadingList(keySet.iterator().next(), values.iterator().next(), selectedPaper.getTitle());
                         JOptionPane.showMessageDialog(paperView, "Successfully Added.");
+
+                        paperView.setVisible(false);
+
+                        ReadingListView readingListView = new ReadingListView(); // updated view
+                        readingListView.setVisible(true);
+                        
+                        ReadingListController readingListController = new ReadingListController(readingListView, researcher);
+
                     } else {
                         JOptionPane.showMessageDialog(paperView, "Paper already exists in the Reading List.");
                     }
