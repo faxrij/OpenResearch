@@ -1,7 +1,8 @@
 package Controller;
 
-import Component.Researcher;
-import Reader.JsonReader;
+import Model.Researcher;
+import FileOperations.JsonOperations.JsonAddReadingList;
+import FileOperations.JsonOperations.JsonGetResearcherReadingLists;
 import View.AddReadingListView;
 import View.ReadingListView;
 
@@ -23,11 +24,14 @@ public class AddReadingListController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String inputtedText = addReadingListView.getReadingListName();
-            JsonReader jsonReader = new JsonReader();
-            jsonReader.addReadingList(researcher.getUsername(), inputtedText);
+            JsonGetResearcherReadingLists jsonGetResearcherReadingLists = new JsonGetResearcherReadingLists();
+
+            JsonAddReadingList jsonAddReadingList = new JsonAddReadingList();
+            jsonAddReadingList.addReadingList(researcher.getUsername(), inputtedText);
+
             addReadingListView.setVisible(false);
 
-            List<String> readingLists = jsonReader.getReadingListNamesForResearcher(researcher.getUsername());
+            List<String> readingLists = jsonGetResearcherReadingLists.getReadingListNamesForResearcher(researcher.getUsername());
             ReadingListView readingListView = new ReadingListView();
             readingListView.displayReadingLists(readingLists);
             readingListView.setVisible(true);

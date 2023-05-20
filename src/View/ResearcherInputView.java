@@ -9,12 +9,9 @@ public class ResearcherInputView extends JFrame {
     private final JButton submit;
 
     public ResearcherInputView() {
-        // set up the JFrame properties
-        setTitle("AddResearcher");
         setSize(600, 400);
-        setLocationRelativeTo(null); // center the JFrame on the screen
+        setLocationRelativeTo(null);
 
-        // set up the user interface elements
         JPanel panel = new JPanel(new GridLayout(2, 5));
 
         panel.add(new JLabel("Add the Username of Researcher:"));

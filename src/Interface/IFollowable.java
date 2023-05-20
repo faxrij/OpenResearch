@@ -1,4 +1,4 @@
-package Repository;
+package Interface;
 
 public interface IFollowable {
     boolean checkIfFollowed(String current, String wanted);

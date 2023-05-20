@@ -1,6 +1,7 @@
-package Repository;
+package FileOperations.XmlOperations;
 
-import Component.Researcher;
+import Interface.ResearcherRepository;
+import Model.Researcher;
 import helper.FollowResearcher;
 import helper.ResearchAuth;
 import helper.ResearcherHelper;
@@ -8,17 +9,13 @@ import helper.UnfollowResearcher;
 
 import java.util.List;
 
-public class XmlResearcherRepository implements ResearcherRepository {
-    private final String xmlFilePath;
-
-    public XmlResearcherRepository(String xmlFilePath) {
-        this.xmlFilePath = xmlFilePath;
-    }
+public class XmlResearcherOperations implements ResearcherRepository {
+    private static final String XML_FILE_PATH = "researchers.xml";
 
     @Override
     public List<Researcher> getResearchers() {
         ResearcherHelper researcherHelper = new ResearcherHelper();
-        return researcherHelper.getResearchersFrom(xmlFilePath);
+        return researcherHelper.getResearchersFrom(XML_FILE_PATH);
     }
 
     @Override

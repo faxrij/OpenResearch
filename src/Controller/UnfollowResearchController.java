@@ -1,9 +1,9 @@
 package Controller;
 
-import Component.Researcher;
-import Repository.ResearcherRepository;
+import Model.Researcher;
+import Interface.ResearcherRepository;
 import View.ResearcherInputView;
-import View.ResearcherView;
+import View.MainView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,10 +13,10 @@ public class UnfollowResearchController {
     private final ResearcherRepository researcherRepository;
     private final ResearcherInputView researcherInputView;
     private final Researcher currentResearcher;
-    private final ResearcherView profileView;
+    private final MainView profileView;
 
     public UnfollowResearchController(ResearcherInputView researcherInputView, ResearcherRepository researcherRepository,
-                                      Researcher currentResearcher, ResearcherView profileView) {
+                                      Researcher currentResearcher, MainView profileView) {
         this.researcherRepository = researcherRepository;
         this.researcherInputView = researcherInputView;
         this.currentResearcher = currentResearcher;

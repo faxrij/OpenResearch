@@ -1,8 +1,8 @@
 package View;
 
-import Component.ArticlePaper;
-import Component.ConferencePaper;
-import Component.Paper;
+import Model.ArticlePaper;
+import Model.ConferencePaper;
+import Model.Paper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +12,13 @@ import java.util.List;
 public class PaperView extends JFrame {
     private JTextArea textArea;
     private JButton downloadButton;
+    private JButton addToReadingListButton;
     private JList<Paper> paperList;
+    private JComboBox<String> dropdownMenu;
+    private final JList<String> readingListsJList;
 
-    public PaperView(List<Paper> papers) {
+    public PaperView(List<Paper> papers, JList<String> readingListsJList) {
+        this.readingListsJList = readingListsJList;
         initializeUI();
         populatePaperList(papers);
     }
@@ -30,11 +34,11 @@ public class PaperView extends JFrame {
         getContentPane().add(scrollPane, BorderLayout.CENTER);
 
         downloadButton = new JButton("Download");
-        JButton addPaperButton = new JButton("Add Paper");
+        addToReadingListButton = new JButton("Add To Reading List");
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.add(downloadButton);
-        buttonPanel.add(addPaperButton);
+        buttonPanel.add(addToReadingListButton);
 
         getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
@@ -49,16 +53,36 @@ public class PaperView extends JFrame {
             }
         });
         JScrollPane listScrollPane = new JScrollPane(paperList);
-        listScrollPane.setPreferredSize(new Dimension(200, getHeight()));
+        listScrollPane.setPreferredSize(new Dimension(300, getHeight()));
         getContentPane().add(listScrollPane, BorderLayout.WEST);
+
+        // Dropdown menu
+        JLabel dropdownLabel = new JLabel("Choose a Reading List to add the Paper:");
+        dropdownMenu = new JComboBox<>();
+        ListModel<String> readingListModel = readingListsJList.getModel();
+
+        int numberOfElements = readingListModel.getSize();
+
+        for (int i = 0; i < numberOfElements; i++) {
+            dropdownMenu.addItem(readingListModel.getElementAt(i));
+        }
+
+        JPanel dropdownPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        dropdownPanel.add(dropdownLabel);
+        dropdownPanel.add(dropdownMenu);
+        getContentPane().add(dropdownPanel, BorderLayout.NORTH);
 
         setVisible(true);
     }
+
 
     public void downloadButtonListener(ActionListener listener) {
         downloadButton.addActionListener(listener);
     }
 
+    public void addToReadingListButtonListener(ActionListener listener) {
+        addToReadingListButton.addActionListener(listener);
+    }
 
     private void populatePaperList(List<Paper> papers) {
         DefaultListModel<Paper> listModel = new DefaultListModel<>();
@@ -67,7 +91,6 @@ public class PaperView extends JFrame {
         }
         paperList.setModel(listModel);
 
-        // Initialize the text area with details of the first paper
         if (!papers.isEmpty()) {
             displayPaperDetails(papers.get(0));
         }
@@ -86,11 +109,10 @@ public class PaperView extends JFrame {
         if (paper.getClass().equals(ArticlePaper.class)) {
             ArticlePaper articlePaper = (ArticlePaper) paper;
 
-             sb.append("Volume: ").append(articlePaper.getVolume()).append("\n");
-             sb.append("Number: ").append(articlePaper.getNumber()).append("\n");
-             sb.append("Journal: ").append(articlePaper.getJournal()).append("\n");
-        }
-        else {
+            sb.append("Volume: ").append(articlePaper.getVolume()).append("\n");
+            sb.append("Number: ").append(articlePaper.getNumber()).append("\n");
+            sb.append("Journal: ").append(articlePaper.getJournal()).append("\n");
+        } else {
             ConferencePaper conferencePaper = (ConferencePaper) paper;
             sb.append("BookTitle: ").append((conferencePaper).getBookTitle()).append("\n");
         }
@@ -98,7 +120,7 @@ public class PaperView extends JFrame {
         sb.append("Authors: ").append(paper.getAuthors()).append("\n");
         sb.append("Title: ").append(paper.getTitle()).append("\n");
         sb.append("Year: ").append(paper.getYear()).append("\n");
-//        sb.append("Issue: ").append(paper.getDOI()).append("\n");
+        // sb.append("Issue: ").append(paper.getDOI()).append("\n");
         sb.append("DOI: ").append(paper.getDOI()).append("\n");
         textArea.setText(sb.toString());
     }
@@ -106,6 +128,8 @@ public class PaperView extends JFrame {
     public JList<Paper> getPaperList() {
         return paperList;
     }
+
+    public JComboBox<String> getDropdownMenu() {
+        return dropdownMenu;
+    }
 }
-
-

@@ -5,20 +5,22 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import Component.Researcher;
+import Model.Researcher;
 
-public class ResearcherView extends JFrame {
-    private JLabel nameLabel;
+public class MainView extends JFrame {  // Main View class is just a UI class that will show up after Login. It has nothing to do like being Mediator or smth.
+    private JLabel nameLabel;  // name of logged in researcher.
     private JTextArea followingResearchersTextArea;
     private JTextArea followerResearchersTextArea;
-    private final JButton followButton;
-    private final JButton readingListButton;
-    private final JButton unfollowButton;
+    private final JButton followButton; // When clicked, it should ask for username of desired researcher to follow.
+    private final JButton readingListButton; // When clicked, Reading List View should be shown up.
+    private final JButton unfollowButton; // When clicked, it should ask for username of desired researcher to unfollow.
+    private final JButton readingListsOfResearchersButton;  // When clicked, User should see other Researchers' reading lists.
 
-    public ResearcherView() {
+    public MainView() {
         unfollowButton = new JButton("Unfollow");
         followButton = new JButton("Follow");
-        readingListButton = new JButton("See Reading List");
+        readingListButton = new JButton("My Reading List");
+        readingListsOfResearchersButton = new JButton("Other Researchers' reading lists");
         initialize();
     }
 
@@ -56,6 +58,7 @@ public class ResearcherView extends JFrame {
         panel.add(followButton);
         panel.add(unfollowButton);
         panel.add(readingListButton);
+        panel.add(readingListsOfResearchersButton);
 
         setContentPane(panel);
     }
@@ -86,4 +89,9 @@ public class ResearcherView extends JFrame {
     public void readingListListener(ActionListener listener) {
         readingListButton.addActionListener(listener);
     }
+
+    public void readingListsOfResearchersListener(ActionListener listener) {
+        readingListsOfResearchersButton.addActionListener(listener);
+    }
+
 }

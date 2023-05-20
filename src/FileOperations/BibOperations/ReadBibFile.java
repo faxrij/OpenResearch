@@ -1,17 +1,17 @@
-package Reader;
+package FileOperations.BibOperations;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import CSVGenerator.WritePapersFile;
-import Component.ArticlePaper;
-import Component.ConferencePaper;
-import Component.Paper;
+import FileOperations.CsvOperations.CsvGenerator;
+import Model.ArticlePaper;
+import Model.ConferencePaper;
+import Model.Paper;
 import org.jbibtex.*;
 
-public class ReadFile {
+public class ReadBibFile {
     public Paper getPapers(String fileName, BibTeXEntry bibTeXEntry) {
         String authors = bibTeXEntry.getField(BibTeXEntry.KEY_AUTHOR).toUserString();
 
@@ -35,7 +35,7 @@ public class ReadFile {
     }
 
     public void read() {
-        String folderPath = "Homework3"; // Replace with the path to your folder
+        String folderPath = "Homework3";
         File folder = new File(folderPath);
 
         if (folder.isDirectory()) {
@@ -65,7 +65,7 @@ public class ReadFile {
                 System.err.println("Error parsing file " + bibFile.getName() + ": " + e.getMessage());
             }
         }
-        WritePapersFile writer = new WritePapersFile();
+        CsvGenerator writer = new CsvGenerator();
         writer.write(papers);
     }
 }

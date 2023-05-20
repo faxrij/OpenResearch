@@ -1,6 +1,6 @@
 package helper;
 
-import Component.Researcher;
+import Model.Researcher;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package Repository;
+package Interface;
 
-import Component.Researcher;
+import Model.Researcher;
 
 public interface IAuthenticateable {
     Researcher authenticate(String username, String password);

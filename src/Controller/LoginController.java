@@ -1,9 +1,9 @@
 package Controller;
 
-import Component.Researcher;
-import Repository.ResearcherRepository;
+import Model.Researcher;
+import Interface.ResearcherRepository;
 import View.LoginView;
-import View.ResearcherView;
+import View.MainView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -31,11 +31,11 @@ public class LoginController {
             if (researcher != null) {
                 JOptionPane.showMessageDialog(loginView, "Login successful");
                 loginView.setVisible(false);
-                ResearcherView profileView = new ResearcherView();
-                ProfileController profileController = new ProfileController(researcher, profileView, researcherRepository);
+                MainView profileView = new MainView();
+                MainController mainController = new MainController(researcher, profileView, researcherRepository);
                 profileView.setVisible(true);
 
-                profileController.displayProfilePage();
+                mainController.displayProfilePage();
 
             } else {
                 JOptionPane.showMessageDialog(loginView, "Invalid username or password");

@@ -1,4 +1,4 @@
-package Component;
+package Model;
 
 public abstract class Paper {
     private String authors;

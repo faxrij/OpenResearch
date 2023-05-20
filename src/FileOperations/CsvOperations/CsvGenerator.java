@@ -1,8 +1,8 @@
-package CSVGenerator;
+package FileOperations.CsvOperations;
 
-import Component.ArticlePaper;
-import Component.ConferencePaper;
-import Component.Paper;
+import Model.ArticlePaper;
+import Model.ConferencePaper;
+import Model.Paper;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-public class WritePapersFile {
+public class CsvGenerator {
     public void write(List<Paper> paperList) {
         try {
             File file = new File("papers.csv");

@@ -1,0 +1,45 @@
+Hey there,
+
+This.txt file is intended to offer you with the greatest UX possible. This paper, I believe, will assist you in effective testing each feature independently.
+
+If papers.csv does not exist when you run the application for the first time, it will be generated.
+
+You will first be greeted with the Login UI -> credentials can be found in the researchers.xml file.
+
+To gain access to other features, you must correctly enter your username and password.
+
+After successfully login in, you will be taken to the Home Page (Dashboard, Main).
+
+There are 4 Buttons : Follow, Unfollow, My Reading List and Other Researcher's reading Lists.
+
+If you click the Follow button, you will be sent to a page where you will be asked to enter a researcher username.
+
+If you enter an authentic researcher who is both existing and unfollowed, you will receive an output message and be forwarded to the Main Page with the following section modified.
+
+When you follow someone, the follower section of the entered researcher is modified.
+
+If you click the Unfollow button, you will be taken to a page where you will be asked to enter a researcher username.
+
+If you enter an authentic researcher who is both existing and followed, you will receive an output message and be sent to the Main Page, with the following section modified.
+
+When you unfollow someone, the follower section of the entered researcher is modified.
+
+If you select My Reading List, you will be taken to the Reading List Page, which displays the user's reading lists.
+
+By clicking on the names of the reading lists, you may view the papers for each one.
+
+You may remove paper by clicking on it and then pressing the remove paper button.
+
+You can create more Reading Lists by clicking the Add Reading List button. You will be led to the Add Reading Page, where you will be asked to name it.
+
+You can also select the See Papers option. Here you will find papers that are currently available.
+
+There, you can select a Paper and press download to download it, which will increase the number of downloads in papers.csv.
+
+You may also select a Paper and then select the Reading List name from the top drop-down menu and press Add Paper to add the selected paper to the Reading List.
+
+Finally, while on the homepage, you can click on Other Researchers' Reading Lists.
+
+You'll be taken to the Researchers Reading List View. On this page, you will find all Reading Lists by researchers other than you.
+
+Have fun.

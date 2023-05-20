@@ -1,27 +1,31 @@
 package Controller;
 
-import Component.Researcher;
-import Reader.JsonReader;
-import Repository.ResearcherRepository;
+import FileOperations.JsonOperations.JsonGetOtherResearchersReadingLists;
+import Model.Researcher;
+import Interface.ResearcherRepository;
 import View.ReadingListView;
 import View.ResearcherInputView;
-import View.ResearcherView;
+import View.MainView;
+import View.ResearchersReadingListView;
+import org.json.JSONArray;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ProfileController {
+public class MainController {
+    // Main Controller is just a Controller class for MainView class. It has nothing to do with being Mediator or having multiple Controllers etc.
     private final Researcher researchModel;
-    private final ResearcherView profileView;
+    private final MainView profileView;
     private final ResearcherRepository researcherRepository;
 
-    public ProfileController(Researcher researchModel, ResearcherView profileView, ResearcherRepository researcherRepository) {
+    public MainController(Researcher researchModel, MainView profileView, ResearcherRepository researcherRepository) {
         this.researchModel = researchModel;
         this.profileView = profileView;
         this.researcherRepository = researcherRepository;
         this.profileView.followListener(new FollowListener());
         this.profileView.unfollowListener(new UnfollowListener());
         this.profileView.readingListListener(new ReadingListListener());
+        this.profileView.readingListsOfResearchersListener(new ReadingListOtherResearcherListener());
     }
 
     public void displayProfilePage() {
@@ -60,6 +64,18 @@ public class ProfileController {
 
             ReadingListController readingListController = new ReadingListController(readingListView,
                     researchModel);
+
+        }
+    }
+
+    private class ReadingListOtherResearcherListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            JsonGetOtherResearchersReadingLists reader = new JsonGetOtherResearchersReadingLists();
+            JSONArray array = reader.filterReadingLists(researchModel.getUsername());
+            ResearchersReadingListView readingListView = new ResearchersReadingListView(array);
+            readingListView.setVisible(true);
 
         }
     }

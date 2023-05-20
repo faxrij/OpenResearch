@@ -1,4 +1,4 @@
-package Component;
+package Model;
 
 public class ConferencePaper extends Paper {
     private final String bookTitle;

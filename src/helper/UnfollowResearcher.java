@@ -17,10 +17,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class UnfollowResearcher {
+    private static final String XML_FILE_PATH = "researchers.xml";
+
     public void unFollow(String currentResearcher, String toBeUnfollowed) {
         try {
             // Load the XML file
-            File xmlFile = new File("researchers.xml");
+            File xmlFile = new File(XML_FILE_PATH);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(xmlFile);

@@ -1,8 +1,8 @@
-package Reader;
+package FileOperations.CsvOperations;
 
-import Component.ArticlePaper;
-import Component.ConferencePaper;
-import Component.Paper;
+import Model.ArticlePaper;
+import Model.ConferencePaper;
+import Model.Paper;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,22 +12,12 @@ public class CsvReader {
     private final static String CSV_FILE_PATH = "papers.csv";
 
     public List<Paper> parseCSV() {
-        return parseCsvFile();
-    }
-
-    private static List<Paper> parseCsvFile() {
         List<Paper> papers = new ArrayList<>();
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH));
-            String line;
 
-            while ((line = reader.readLine()) != null) {
-                Paper paper = parseCsvLine(line);
-                if (paper != null) {
-                    papers.add(paper);
-                }
-            }
+            addingPaperUntilTheEndOfFile(papers, reader);
 
             reader.close();
         } catch (IOException e) {
@@ -37,7 +27,17 @@ public class CsvReader {
         return papers;
     }
 
-    private static Paper parseCsvLine(String line) {
+    private void addingPaperUntilTheEndOfFile(List<Paper> papers, BufferedReader reader) throws IOException {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            Paper paper = createPaperFromLine(line);
+            if (paper != null) {
+                papers.add(paper);
+            }
+        }
+    }
+
+    private Paper createPaperFromLine(String line) {
         String[] csvParts = line.split(",");
 
         String paperType = csvParts[0];
@@ -60,7 +60,7 @@ public class CsvReader {
         return null;
     }
 
-    private static String getValue(String[] csvParts, String keyword) {
+    private String getValue(String[] csvParts, String keyword) {
         for (int i = 1; i < csvParts.length; i += 1) {
             if (csvParts[i].equals(keyword)) {
                 return csvParts[i + 1];

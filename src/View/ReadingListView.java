@@ -1,6 +1,6 @@
 package View;
 
-import Reader.JsonReader;
+import FileOperations.JsonOperations.JsonGetPaperNames;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,8 +87,8 @@ public class ReadingListView extends JFrame {
     }
 
     private List<String> getPapersForReadingList(String readingListName) {
-        JsonReader jsonReader = new JsonReader();
-        return jsonReader.getPapersOfReadingList(readingListName);
+        JsonGetPaperNames jsonGetPaperNames = new JsonGetPaperNames();
+        return jsonGetPaperNames.getPapersOfReadingList(readingListName);
     }
 
     public void removePaperListener(ActionListener listener) {

@@ -1,6 +1,6 @@
 package helper;
 
-import Component.Researcher;
+import Model.Researcher;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -49,7 +49,6 @@ public class ResearcherHelper {
 
                 researcher.setFollower(getInteractedResearchers(element, "followedBy"));
                 researcher.setFollowing(getInteractedResearchers(element, "following"));
-//                researcher.setFollowing(getInteractedResearchers(element, "readingList"));
 
                 researcherList.add(researcher);
             }

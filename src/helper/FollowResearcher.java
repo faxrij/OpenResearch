@@ -17,10 +17,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class FollowResearcher {
+    private static final String XML_FILE_PATH = "researchers.xml";
+
     public void addFollower(String currentResearcher, String toBeFollowed) {
         try {
             // Load the XML file
-            File xmlFile = new File("researchers.xml");
+            File xmlFile = new File(XML_FILE_PATH);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(xmlFile);

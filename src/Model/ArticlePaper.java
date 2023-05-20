@@ -1,4 +1,4 @@
-package Component;
+package Model;
 
 public class ArticlePaper extends Paper {
     private String volume;

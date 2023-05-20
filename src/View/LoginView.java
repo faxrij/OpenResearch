@@ -50,7 +50,4 @@ public class LoginView extends JFrame {
         loginButton.addActionListener(listener);
     }
 
-    public void showErrorMessage(String message) {
-        errorMessageLabel.setText(message);
-    }
 }

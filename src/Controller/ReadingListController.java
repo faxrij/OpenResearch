@@ -1,9 +1,10 @@
 package Controller;
 
-import Component.Paper;
-import Component.Researcher;
-import Reader.CsvReader;
-import Reader.JsonReader;
+import FileOperations.JsonOperations.JsonRemove;
+import Model.Paper;
+import Model.Researcher;
+import FileOperations.CsvOperations.CsvReader;
+import FileOperations.JsonOperations.JsonGetResearcherReadingLists;
 import View.AddReadingListView;
 import View.PaperView;
 import View.ReadingListView;
@@ -27,8 +28,8 @@ public class ReadingListController {
     }
 
     public void displayReadingLists() {
-        JsonReader jsonReader = new JsonReader();
-        List<String> readingLists = jsonReader.getReadingListNamesForResearcher(researcher.getUsername());
+        JsonGetResearcherReadingLists jsonGetResearcherReadingLists = new JsonGetResearcherReadingLists();
+        List<String> readingLists = jsonGetResearcherReadingLists.getReadingListNamesForResearcher(researcher.getUsername());
         readingListView.displayReadingLists(readingLists);
     }
 
@@ -37,9 +38,9 @@ public class ReadingListController {
         public void actionPerformed(ActionEvent e) {
             CsvReader csvReader = new CsvReader();
             List<Paper> papers = csvReader.parseCSV();
-            PaperView paperView = new PaperView(papers);
+            PaperView paperView = new PaperView(papers, readingListView.getReadingListsJList());
             paperView.setVisible(true);
-            PaperController paperController = new PaperController(paperView);
+            PaperController paperController = new PaperController(paperView, researcher);
         }
     }
 
@@ -62,14 +63,12 @@ public class ReadingListController {
             // Get the selected reading list
             String selectedReadingList = readingListView.getReadingListsJList().getSelectedValue();
 
-            JsonReader jsonReader = new JsonReader();
+            JsonRemove jsonRemove = new JsonRemove();
 
             // Remove the paper from the reading list
-            jsonReader.removePaperFromReadingList(selectedReadingList, selectedPaper);
+            jsonRemove.removePaperFromReadingList(selectedReadingList, selectedPaper);
             DefaultListModel<String> papersListModel = (DefaultListModel<String>) readingListView.getPapersJList().getModel();
             papersListModel.removeElement(selectedPaper);
-
         }
     }
-
 }
