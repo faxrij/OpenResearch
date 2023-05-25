@@ -79,7 +79,7 @@ public class PaperController { // Paper View Controller
 
                         ReadingListView readingListView = new ReadingListView(); // updated view
                         readingListView.setVisible(true);
-                        
+
                         ReadingListController readingListController = new ReadingListController(readingListView, researcher);
 
                     } else {
